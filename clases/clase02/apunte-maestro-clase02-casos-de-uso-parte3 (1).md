@@ -117,16 +117,17 @@ Porque estar logueado es una precondición: una condición previa que habilita e
 
 Tercera relación, y la que faltaba para cerrar el mecanismo de la garantía.
 
-El Técnico llega a la casa. El televisor "se compró para el Mundial, solo se vieron los partidos, y ya falla". ¿El técnico confía en la palabra del televidente? ¿Mira la factura de compra? La factura dice cuándo se compró, no cuánto se usó — comprado hace cinco años no significa 10.000 horas si solo lo prendían diez minutos a la mañana para ver el clima. Por eso existe el mecanismo de la sección 4: el sistema **acumuló** el tiempo real de uso, y el técnico, dentro de Realizar mantenimiento, **consulta las horas de uso**.
+El Técnico llega a la casa. El televisor "se compró para el Mundial, solo se vieron los partidos, y ya falla". ¿El técnico confía en la palabra del televidente? ¿Mira la factura de compra? La factura dice cuándo se compró, no cuánto se usó — comprado hace cinco años no significa 10.000 horas si solo lo prendían diez minutos a la mañana para ver el clima. Por eso existe el mecanismo de la sección 4: el sistema **acumuló** el tiempo real de uso. Y el Técnico tiene una función propia para mirarlo: **Consultar horas de uso** — un caso de uso más, colgado directo del actor, igual que Realizar mantenimiento.
 
 Y ahora la bifurcación del negocio: consultó, ¿y? Si las horas superan el umbral, sigue el camino normal — lo repara. Pero si el televisor tiene apenas unas horas de uso, pasa algo distinto: **lo deriva a la garantía**. Eso no ocurre siempre; ocurre **bajo una condición**, y cuando ocurre, reemplaza el camino normal. Esa relación es la **extensión**:
 
 ```
- ( Realizar mantenimiento ) --inc--> ( Consultar horas de uso ) <--ext-- ( Derivar a garantía )
+ [actor] TÉCNICO ────( Realizar mantenimiento )
+        └───────────( Consultar horas de uso ) <--ext-- ( Derivar a garantía )
 ```
 
-- La inclusión de la izquierda: consultar las horas se hace **siempre** dentro del mantenimiento (y se destaca).
-- La extensión de la derecha: derivar a garantía sucede **solo si** se da la condición. La decisión por defecto es una (reparar); la excepcional es la otra (garantía).
+- Mantenimiento y consulta son **dos funciones independientes del Técnico**, cada una asociada directo al actor. Puede consultar las horas sin reparar nada, y cada una se dispara y se testea por separado. Que en la vida real el técnico consulte antes de decidir es orden temporal — y el orden, como vas a ver en la sección 8, no se dibuja como relación.
+- La extensión: derivar a garantía sucede **solo si** se da la condición. La decisión por defecto es una (reparar); la excepcional es la otra (garantía). Y notá la economía del modelo: Consultar horas de uso tiene **una sola** relación colgando — la extensión, que es la que el negocio necesita.
 
 **La heurística de la cátedra, para grabársela:** todo caso de uso que se llame **verificar, validar o controlar** trae una extensión colgando. ¿Por qué? Porque verificar significa mirar un valor y **tomar una decisión u otra**. Si después de controlar tomo siempre la misma decisión… no controlé nada. El control existe para que a veces pase otra cosa — y ese "a veces pasa otra cosa" es, por definición, una extensión.
 

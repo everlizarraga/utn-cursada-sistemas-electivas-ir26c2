@@ -19,7 +19,7 @@ Todo lo de las tres partes anteriores, junto. El inventario completo primero, y 
 |---|---|---|
 | **Televidente** (principal, arriba de la cadena) | Encender TV · Apagar TV · Cambiar canal · Seleccionar canal · Ajustar resolución | Encender y Apagar incluyen Tomar time-stamp; Apagar incluye Acumular tiempo de uso; cada función se generaliza en sus formas (control remoto / botonera / app…) |
 | **Instalador / Admin / Configurador** (hereda del Televidente) | Conectar entrada | Conectar entrada se especializa en Conectar WiFi y Conectar TDA |
-| **Técnico** (hereda del Instalador) | Realizar mantenimiento | Incluye Consultar horas de uso, que es extendido por Derivar a garantía |
+| **Técnico** (hereda del Instalador) | Realizar mantenimiento · Consultar horas de uso | Consultar horas de uso es extendido por Derivar a garantía |
 | **Tiempo/Reloj** (secundario, punteado) | — | Asociado a Tomar time-stamp |
 | **TDA** (secundario, punteado) | — | Asociado a Conectar TDA |
 | **Access point** (secundario, punteado) | — | Asociado a Conectar WiFi |
@@ -37,7 +37,7 @@ Dos aclaraciones del inventario:
 
 **El mecanismo de las horas de uso** — Parte 3, sección 4: Encender y Apagar incluyen Tomar time-stamp (reusabilidad), Apagar incluye Acumular tiempo de uso (destacar), y el actor Tiempo, punteado, asociado a Tomar time-stamp.
 
-**El Técnico y la garantía** — Parte 3, sección 6: mantenimiento → inc → consulta ← ext ← garantía.
+**El Técnico y la garantía** — Parte 3, sección 6: Realizar mantenimiento y Consultar horas de uso como funciones directas del Técnico, y Derivar a garantía extendiendo a la consulta.
 
 **El Instalador y las entradas** — este es el fragmento nuevo:
 
