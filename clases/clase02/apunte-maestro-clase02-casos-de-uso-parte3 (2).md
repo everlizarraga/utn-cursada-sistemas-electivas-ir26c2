@@ -53,7 +53,9 @@ El error típico es modelar esas variantes con las otras dos relaciones. Vale la
 ✅  ( Apagar TV ) ◁─────── ( Apagar TV con control remoto )     ← generalización
 ```
 
-¿Por qué no son extensiones? Porque las especializaciones **no son vías excepcionales ni condicionales**. No es que "siempre apago con el control y, si se quedó sin pilas, excepcionalmente uso el botón" — ese sería otro modelo, el de una condición anormal que se trata aparte (y eso sí es una extensión, sección 6). Acá las vías son equivalentes y excluyentes en cada ejecución: elijo una, punto. Instancio una o la otra.
+¿Por qué no son extensiones? Porque las especializaciones **no son vías excepcionales ni condicionales**. No es que "siempre apago con el control y, si se quedó sin pilas, excepcionalmente uso el botón" — ese sería otro modelo, el de una condición anormal que se trata aparte (y eso sí es una extensión, sección 6). Acá las vías son equivalentes y excluyentes en cada ejecución: elijo una, punto. Instancio una o la otra. **No hay condición — y sin condición, no se modela con extensión.**
+
+Y hay un segundo argumento, mirando el escenario. Suponé que igual lo modelás con extends: ¿cómo queda el escenario del caso de uso base? Una serie de **ifs anidados** — if es por control remoto… if es por botonera… if es por voz… Un escenario **inmantenible**, un **bodoque**, **difícil de testear** — los mismos pecados de la Parte 1, ahora escondidos adentro del flujo. Con la generalización, en cambio, **cada ejecución (cada instancia) se implementa por separado**: cada especialización tiene su escenario limpio, sin ifs. Es la cohesión funcional ganándole a la cohesión lógica, otra vez.
 
 ¿Y por qué no son inclusiones? Porque nada se está ejecutando "adentro" de nada: apagar desde la app no es un paso dentro del flujo de Apagar TV — **es** Apagar TV, implementado de una forma concreta.
 

@@ -97,6 +97,17 @@ La mejor cohesión que puede tener un módulo es la **cohesión funcional**: el 
     una función por óvalo → describible, testeable, con control
 ```
 
+### El mismo juicio, en los conectores — y la cohesión mala tiene nombre
+
+El bodoque tiene una versión más sutil, que no parece bodoque a simple vista. Mirá la parte trasera del televisor: HDMI, VGA, audio RCA, componente, antena, euroconector, salida óptica… ¿Y si modelo un único caso de uso **"Conectar periférico"** que los cubra a todos?
+
+Pensalo con las dos varas de diseño:
+
+- **Acoplamiento**: ese caso de uso necesita *todos los tipos de conectores* como dato de entrada — depende de todo el panel. **Alto acoplamiento.**
+- **Cohesión**: su escenario sería una serie de "IF es HDMI… IF es VGA… IF es antena…". Esa cohesión también tiene nombre: **cohesión lógica** — el módulo agrupa cosas "parecidas" y las distingue a puro IF adentro. Es la cohesión mala: escenario inmantenible y difícil de testear.
+
+La salida es la de siempre: **modelar cada "Conectar X" por separado**. Cada caso de uso requiere solo *su* tipo de conector como entrada (**bajo acoplamiento**) y su escenario no tiene IFs — a lo sumo, verificar que el conector exista (**cohesión funcional**). Un cable, un óvalo, una función.
+
 Fijate cómo la palabra **función** unifica todo el hilo: cohesión **funcional** → un caso de uso es una **función** que pretende el actor → relacionado con un requerimiento **funcional**. No es casualidad: es el mismo concepto mirado desde tres lugares.
 
 **Para el parcial, si te preguntan por qué "Obtener información" no es un caso de uso**
@@ -134,6 +145,8 @@ Consolidadas en una tabla — son las reglas contra las que se corrige cada óva
 
 - **Cambiar canal ≠ Seleccionar canal.** Cambiar es el zapping: no sé qué ver y voy pasando. Seleccionar es que ya sé qué canal o contenido quiero. Distinta intención → distinto caso de uso.
 - **Encender ≠ Apagar.** Son dos cambios de estado distintos, con condiciones de arranque distintas. Dos óvalos, siempre.
+
+☕ Esto es la **regla del café con leche** de la clase 1, ahora aplicada a casos de uso: arrancá con los óvalos separados y granulares; si después resulta que eran lo mismo, los unís — al revés no se puede.
 
 ---
 

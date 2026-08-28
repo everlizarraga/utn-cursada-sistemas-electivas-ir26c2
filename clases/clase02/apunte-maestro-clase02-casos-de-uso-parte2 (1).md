@@ -185,6 +185,21 @@ Cuando el actor es un sistema externo, el nombre del caso de uso sigue la misma 
 
 Preguntate **cuál es tu producto**. Tu sistema es la discoteca — el melómano quiere **traer** la canción hacia su sistema. Desde el punto de vista de tu producto, la canción se **importa**. Que Spotify la exporte es el punto de vista del otro sistema, y el diagrama es del tuyo. El actor externo Spotify se asocia entonces con **Importar canción** — el caso de uso específico, nombrado desde tu lado del mostrador.
 
+### Una función del negocio, un solo caso de uso
+
+El punto de vista tiene una regla general que conviene dejar escrita, porque el error contrario es muy tentador. Pensá en el negocio más simple del mundo: alguien vende caramelos, alguien los compra. ¿El diagrama lleva un caso de uso "Vender caramelos" **y** otro "Comprar caramelos"?
+
+No. **Comprar y Vender son la misma función dentro del negocio modelado, vista desde dos actores distintos.** Se diagrama **un único caso de uso, desde un único punto de vista**: si incluís Comprar, no incluís Vender — y viceversa. Duplicarlo es dibujar dos veces la misma función con nombres cruzados.
+
+¿Y qué pasa con el actor que quedó "sin" su verbo? Puede asociarse igual: **los dos actores pueden relacionarse con el mismo caso de uso.** Lo que no da igual es de qué lado queda cada uno:
+
+```
+✅  [actor] Vendedor ────( Vender caramelos )──── [actor] Comprador     ← correcta
+❌  [actor] Comprador ───( Vender caramelos )──── [actor] Vendedor      ← incorrecta
+```
+
+**La regla de distribución: el actor que da nombre a la acción — el que inicia el caso de uso — va a la izquierda.** "Vender caramelos" lo inicia el que vende; el Vendedor abre el diagrama y el Comprador acompaña desde la derecha. Es la versión fina del "principales a la izquierda" que ya viste: la izquierda no es decorativa, marca quién dispara la función.
+
 ---
 
 ## 🔴 8. El Tiempo como actor
