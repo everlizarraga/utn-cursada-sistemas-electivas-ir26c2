@@ -141,6 +141,10 @@ Contraste que confirma la regla del *qué*: en este mismo sistema, el perfil **A
 
 ¿Y se puede crear un actor abstracto en el televisor — un "alguien que opera la tele" arriba de todos? Poder, se puede. La pregunta es si hay una razón: acá no hay una función común que valga la pena subir (como era el Login), así que no se justifica. El abstracto se crea cuando conviene, no por deporte.
 
+**Y cuándo conviene tiene una regla concreta.** Un actor que solo tiene Login existe para que **varios** actores hereden de él — hermanos que no están en la misma cadena. En el sistema de cajas paga su lugar si además de la Cajera hay otros roles fuera de esa cadena que también se loguean. Ahora mirá el caso contrario: una **única cadena lineal**, un actor arriba, otro abajo, otro más abajo, y el abstracto en la punta con su Login. ¿Cuántos heredan directamente de él? **Uno.** Los demás lo reciben por transitividad — que la tendrían igual si el Login estuviera en el primer actor concreto de la cadena. El abstracto ahí no está sumando nada.
+
+Arrancar con ese actor separado no es un error — es café con leche, y si más adelante aparecen roles fuera de la cadena, ya está el lugar preparado. Pero es una decisión que tenés que poder **justificar** cuando te pregunten, y si no hay hermanos a la vista, justificarla cuesta. Cuando la dejes igual, dejala escrita como aclaración de diseño (Parte 4).
+
 **Para el parcial, si te preguntan qué es un actor abstracto**
 Es un actor que no se instancia nunca: ningún usuario concreto juega ese rol directamente. Existe para agrupar una funcionalidad común (por ejemplo, Login) que todos los actores concretos heredan, evitando repetir la asociación en cada uno. La herencia desde él es transitiva hacia toda la cadena de hijos.
 

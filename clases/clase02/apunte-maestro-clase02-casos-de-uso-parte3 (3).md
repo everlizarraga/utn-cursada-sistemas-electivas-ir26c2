@@ -38,6 +38,16 @@ Cómo leer cada pieza — y esto es definición de parcial:
 - **El verbo se repite**: apagar, apagar, apagar. Es la señal visual de que es la misma función en todas. (Hay quien no repite el verbo en las especializaciones; repetirlo hace el diagrama mucho más fácil de entender, y es lo que vas a hacer acá.)
 - **Notación**: línea llena, **triángulo de punta hueca apoyado en el caso de uso general**. La misma punta hueca que la herencia entre actores — y se corrige igual de estricto.
 
+### La trampa: verbo repetido no es polimorfismo
+
+Cuidado con leer la señal como si fuera el criterio. Que el verbo se repita es **necesario** pero **no alcanza**: lo que justifica la generalización es que cambie **la forma de ejecutar** la función. Y hay un error muy tentador que cumple con el verbo y falla en lo otro.
+
+Pensá en la discoteca personal de la Parte 2 (vinilos, CDs, cassettes). "Dar de alta medio" con tres especializaciones: Dar de alta vinilo, Dar de alta CD, Dar de alta cassette. Mismo verbo, tres óvalos, triángulo hueco… y **no hay polimorfismo**. ¿Qué cambia entre dar de alta un vinilo y dar de alta un CD? Los **campos** — el vinilo tiene lados, el CD no —, pero **el flujo es el mismo**: cargar los datos del medio. Lo que varía es el **tipo del objeto**, no la ejecución de la función. Y la variación de tipo de un objeto se resuelve en el modelo de datos (subtipos de "medio"), no con generalización de casos de uso.
+
+Compará con el caso legítimo del mismo sistema: Agregar canción **con ingreso manual** vs Agregar canción **importada desde Spotify**. Mismo verbo, sí — pero además **distinta ejecución y distintos recursos**: en una tipeás, en la otra el sistema conversa con otro sistema. Ahí sí hay polimorfismo.
+
+**El test, en una pregunta: entre las supuestas especializaciones, ¿cambian los pasos del escenario, o solo cambian los campos?** Si cambian los pasos, hay polimorfismo y va generalización. Si solo cambian los campos, es un único caso de uso sobre un objeto con subtipos — y la pregunta que te van a hacer al corregir es, textual, *"¿cuál es el polimorfismo que justifica la generalización?"*. Conviene tener la respuesta antes de dibujar el triángulo.
+
 **Para el parcial, si te preguntan cuándo hay generalización entre casos de uso**
 Cuando existe polimorfismo: distintas formas de implementar una misma función, excluyentes entre sí en cada ejecución (se instancia una o la otra). El caso de uso general es abstracto —no se implementa, no tiene escenario, funciona como interfaz— y las especializaciones son las que se implementan, cada una con su escenario. Notación: línea llena con triángulo hueco apoyado en el caso de uso general, repitiendo el verbo.
 
@@ -132,6 +142,10 @@ Y ahora la bifurcación del negocio: consultó, ¿y? Si las horas superan el umb
 - La extensión: derivar a garantía sucede **solo si** se da la condición. La decisión por defecto es una (reparar); la excepcional es la otra (garantía). Y notá la economía del modelo: Consultar horas de uso tiene **una sola** relación colgando — la extensión, que es la que el negocio necesita.
 
 **La heurística de la cátedra, para grabársela:** todo caso de uso que se llame **verificar, validar o controlar** trae una extensión colgando. ¿Por qué? Porque verificar significa mirar un valor y **tomar una decisión u otra**. Si después de controlar tomo siempre la misma decisión… no controlé nada. El control existe para que a veces pase otra cosa — y ese "a veces pasa otra cosa" es, por definición, una extensión.
+
+**Y la heurística no depende de que el verbo esté en el nombre.** El caso canónico es el más universal de todos: **Login**. No se llama "validar", pero *es* una validación — el sistema mira las credenciales y decide. Entonces preguntate lo que te van a preguntar al corregir: **¿puede fallar el login?** Sí. ¿Y qué pasa cuando falla — reintento, bloqueo por intentos, recuperación de cuenta? Sea lo que decidas para tu sistema, ese comportamiento es la vía excepcional, y es una extensión que cuelga de Login. Un Login dibujado como óvalo solo, sin nada colgando, está diciendo que nunca falla — y eso no lo cree nadie.
+
+La pregunta general, para cualquier caso de uso: **¿puede fallar de una forma que dispare un comportamiento distinto?** Si sí, ahí hay una extensión que todavía no dibujaste.
 
 **Notación**: línea **punteada**, **desde el caso de uso que extiende hacia el caso de uso base**, con **ext** sobre la línea. Ojo con el sentido: apunta al revés que la intuición — sale de la extensión (Derivar a garantía) y toca al base (Consultar horas de uso).
 
